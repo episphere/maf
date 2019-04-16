@@ -1,0 +1,23 @@
+{
+  "name": "maf",
+  "version": "1.0.0",
+  "description": "portable maf API",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/episphere/maf.git"
+  },
+  "author": "Jonas Almeida",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/episphere/maf/issues"
+  },
+  "homepage": "https://github.com/episphere/maf#readme",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
