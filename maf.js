@@ -5,7 +5,7 @@ maf=function(){
     console.log('maf.js initiatized')
     maf.div=document.getElementById('mafDiv')
     if(maf.div){
-        let h = '<p><a href="https://docs.gdc.cancer.gov/Data/File_Formats/MAF_Format/" target="_blank">maf</a> at <a href="https://www.github.com/episphere/maf" target="_blank"> Episphere loaded</a>,'
+        let h = '<p>Portable <a href="https://docs.gdc.cancer.gov/Data/File_Formats/MAF_Format/" target="_blank">maf</a> API at <a href="https://www.github.com/episphere/maf" target="_blank"> Episphere</a> loaded,'
         h += ' <span id="mafInfo">information on how to use it can be found <a href="https://github.com/episphere/maf/wiki" target="_blank">here</a>.</span></p>'
         maf.div.innerHTML=h
         location.hash.match(/[#&](maf=[^&]+)/)
