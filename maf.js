@@ -72,6 +72,11 @@ if(typeof(module)!="undefined"){ // if this is been required
     module.exports=MAF
 }
 
+if(typeof(define)!="undefined"){ // if this is been required
+    console.log('MAF defined at '+Date())
+    define(MAF)
+}
+
 /*
 NOTES
 
