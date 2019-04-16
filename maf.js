@@ -10,7 +10,9 @@ this.load=function(url){ // reading from a url on a web browser
     this.url=url||MAF.url
     let that=this
     return new Promise(function(resolve,reject){
-        fetch(that.url).then(resp=>{
+        fetch(that.url,{
+            mode:'no-cors'
+        }).then(resp=>{
             resp.text().then(txt=>{
                 resolve(that.txt2json(txt))
             })
@@ -48,6 +50,38 @@ this.txt2json=txt=>{
     return this
 }
 
+this.getByValue=function(val,attr){ // default is get by case_id, where missing attr is assigned to that attribute, val can also be a function
+    if(this.body.case_id){
+        attr=attr||'case_id'
+    }
+    let vv = []
+    let aa = Object.keys(this.body)
+    if(typeof(val)=='function'){
+        const n = this.body[aa[0]].length
+        const ii = [...Array(n)].map((_,i)=>i)
+        ii.forEach(i=>{
+            let vi={}
+            aa.forEach(a=>{
+                vi[a]=this.body[a][i]
+            })
+            if(val(vi)){
+                vv.push(vi)
+            }
+        })
+    }else{
+        this.body[attr].forEach((v,i)=>{
+            if(v==val){
+                let vi={}
+                aa.forEach(a=>{
+                    vi[a]=this.body[a][i]
+                })
+                vv.push(vi)
+            }
+        })
+    }
+    return vv
+}
+
 }
 
 MAF.loaded_at=Date()
@@ -74,13 +108,17 @@ if(typeof(module)!="undefined"){ // if this is been required
 
 if(typeof(define)!="undefined"){ // if this is been required
     console.log('MAF defined at '+Date())
-    define(MAF)
+    define({MAF:MAF})
 }
 
 /*
 NOTES
 
 http://localhost:8000/maf/#maf=TCGA.PAAD.mutect.fea333b5-78e0-43c8-bf76-4c78dd3fac92.DR-10.0.somatic.maf.txt
+m = await (new MAF).load('TCGA.PAAD.mutect.fea333b5-78e0-43c8-bf76-4c78dd3fac92.DR-10.0.somatic.maf.txt')
+m.getByValue('ecdd0e44-0add-4a08-a3f8-ab2f51df7afd')
+m.getByValue(d=>(d.case_id=='ecdd0e44-0add-4a08-a3f8-ab2f51df7afd'))
 
+x = (await (new MAF).load('TCGA.PAAD.mutect.fea333b5-78e0-43c8-bf76-4c78dd3fac92.DR-10.0.somatic.maf.txt')).getByValue('ecdd0e44-0add-4a08-a3f8-ab2f51df7afd')
 
 */
