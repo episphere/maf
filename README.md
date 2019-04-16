@@ -1,2 +1,2 @@
 # maf
-an API for maf files
+a portable API for maf files
