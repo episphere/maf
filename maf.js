@@ -33,6 +33,18 @@ this.txt2json=txt=>{
             this.head[LL[0]]=LL[1]
         }
     })
+    let attr = bodyLines[0].split(/\t/g)
+
+    //this.bodyLines=bodyLines
+    this.body={}
+    attr.forEach(a=>{
+        this.body[a]=[]
+    })
+    bodyLines.slice(1).forEach((vv,i)=>{
+        vv.split(/\t/g).forEach((v,j)=>{
+            this.body[attr[j]][i]=v
+        })
+    })
     return this
 }
 
