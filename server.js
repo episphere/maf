@@ -1,5 +1,6 @@
 console.log('maf server.js loaded');
 
+fs=require('fs')
 MAF = require('./maf.js')
 
 
