@@ -1,8 +1,8 @@
 console.log('maf.js loaded')
 
-MAF=function(){
+MAF=function(url){
     //ini
-    console.log(' MAF prototype instatiated (OO types can think of it as a class) ')
+    console.log(' MAF prototype instatiated at'+Date())   
 
 this.created_at=Date()
 
@@ -84,6 +84,10 @@ this.getByValue=function(val,attr){ // default is get by case_id, where missing 
 
 }
 
+MAF.load=async function(url){ // reading from a url on a web browser
+    return (await (new MAF).load(url))
+}
+
 MAF.loaded_at=Date()
 
 if(typeof(window)!='undefined'){ // if this is running in the browser
@@ -120,5 +124,11 @@ m.getByValue('ecdd0e44-0add-4a08-a3f8-ab2f51df7afd')
 m.getByValue(d=>(d.case_id=='ecdd0e44-0add-4a08-a3f8-ab2f51df7afd'))
 
 x = (await (new MAF).load('TCGA.PAAD.mutect.fea333b5-78e0-43c8-bf76-4c78dd3fac92.DR-10.0.somatic.maf.txt')).getByValue('ecdd0e44-0add-4a08-a3f8-ab2f51df7afd')
+
+x = (await (new MAF).load('TCGA.PAAD.mutect.fea333b5-78e0-43c8-bf76-4c78dd3fac92.DR-10.0.somatic.maf.txt')).getByValue(d=>(d.case_id=='ecdd0e44-0add-4a08-a3f8-ab2f51df7afd'))
+
+m = new MAF
+await m.load('TCGA.PAAD.mutect.fea333b5-78e0-43c8-bf76-4c78dd3fac92.DR-10.0.somatic.maf.txt')
+
 
 */
