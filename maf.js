@@ -16,9 +16,7 @@ maf.ui=function(div){
 
 maf.load=function(url){ // reading from a url on a web browser
     return new Promise(function(resolve,reject){
-        fetch(url,{
-            mode:'no-cors'
-        }).then(resp=>{
+        fetch(url).then(resp=>{
             resp.text().then(txt=>{
                 resolve(maf.txt2json(txt,url))
             })
