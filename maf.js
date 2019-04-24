@@ -14,6 +14,17 @@ maf.ui=function(div){
     }
 }
 
+maf.getFile=function(url){
+    url=url||'https://api.gdc.cancer.gov/data/e3ad739d-6baa-4c42-a6f7-786d069239c1'
+    return new Promise(function(resolve,reject){
+        fetch(url).then(resp=>{
+            resp.blob().then(blb=>{
+                resolve(blb)
+            })
+        })
+    })
+}
+
 maf.load=function(url){ // reading from a url on a web browser
     return new Promise(function(resolve,reject){
         fetch(url).then(resp=>{
